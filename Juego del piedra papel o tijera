@@ -1,0 +1,45 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class PiedraPapelTijera {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        String[] opciones = {"Piedra", "Papel", "Tijera"};
+        boolean jugar = true;
+
+        while (jugar) {
+            System.out.println("Elige: (0) Piedra, (1) Papel, (2) Tijera. (3) Salir");
+            int eleccionUsuario = scanner.nextInt();
+
+            if (eleccionUsuario == 3) {
+                jugar = false;
+                System.out.println("Gracias por jugar. ¡Hasta luego!");
+                break;
+            }
+
+            if (eleccionUsuario < 0 || eleccionUsuario > 2) {
+                System.out.println("Opción no válida. Por favor elige de nuevo.");
+                continue;
+            }
+
+            int eleccionComputadora = random.nextInt(3);
+            System.out.println("La computadora eligió: " + opciones[eleccionComputadora]);
+
+            // Determinar el ganador
+            if (eleccionUsuario == eleccionComputadora) {
+                System.out.println("¡Es un empate!");
+            } else if ((eleccionUsuario == 0 && eleccionComputadora == 2) || 
+                       (eleccionUsuario == 1 && eleccionComputadora == 0) || 
+                       (eleccionUsuario == 2 && eleccionComputadora == 1)) {
+                System.out.println("¡Ganaste!");
+            } else {
+                System.out.println("¡Perdiste!");
+            }
+        }
+
+        scanner.close();
+    }
+}
